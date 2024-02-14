@@ -2,9 +2,12 @@ package Miyu.characters;
 
 import Miyu.relics.Thermos;
 import basemod.abstracts.CustomPlayer;
+import basemod.animations.AbstractAnimation;
 import basemod.animations.SpineAnimation;
+import basemod.animations.SpriterAnimation;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
 import com.evacipated.cardcrawl.modthespire.lib.SpireEnum;
@@ -95,6 +98,13 @@ public class TheDefault extends CustomPlayer {
 			"MiyuResources/images/char/defaultCharacter/orb/layer5d.png",};
 
 	// =============== /TEXTURES OF BIG ENERGY ORB/ ===============
+
+	// 기본 애니메이션
+	private static final AbstractAnimation standing = new SpineAnimation(
+			"MiyuResources/images/char/defaultCharacter/Spriter/Miyustand.atlas",
+			"MiyuResources/images/char/defaultCharacter/Spriter/Miyustand.json", 1f);
+	private static final AbstractAnimation onCovered = new SpriterAnimation(
+			"MiyuResources/images/char/defaultCharacter/Spriter/testAnima.scml");
 
 	// =============== CHARACTER CLASS START =================
 
@@ -283,4 +293,30 @@ public class TheDefault extends CustomPlayer {
 		return TEXT[2];
 	}
 
+	/*
+	 * TakingCoverAction 에서 호출됨. 애니메이션을 교체함
+	 */
+	public void updateState(String stanceId) {
+		switch (stanceId) {
+			case "Miyu:OnCovered" :
+				this.animation = onCovered;
+				// this.state.setAnimation(0, "animation", true);
+				break;
+			case "Neutral" :
+				this.animation = standing;
+				// this.state.setAnimation(0, "Miyustand", true);
+				break;
+		}
+	}
+
+	/*
+	 * 상태에 따라 다른 애니메이션을 사용함
+	 */
+	public enum Animations {
+		A(""), B("");
+		public final String animation;
+		Animations(String animationPath) {
+			animation = animationPath;
+		}
+	}
 }

@@ -534,6 +534,9 @@ public class DefaultMod
 		 */
 		BaseMod.loadCustomStringsFile(UIStrings.class, pathByLanguage + "DefaultMod-Ui-Strings.json");
 
+		// 경지(상태)의 설명문과 이름을 가져옵니다. by yeeuou
+		BaseMod.loadCustomStringsFile(StanceStrings.class, pathByLanguage + "DefaultMod-Stance-Strings.json");
+
 		logger.info("Done edittting strings");
 	}
 

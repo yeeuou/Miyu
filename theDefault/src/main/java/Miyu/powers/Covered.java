@@ -1,6 +1,7 @@
 package Miyu.powers;
 
 import Miyu.DefaultMod;
+import Miyu.actions.TakingCoverAction;
 import Miyu.cards.AbstractDefaultCard;
 import Miyu.cards.OnReduceCover;
 import Miyu.util.TextureLoader;
@@ -123,6 +124,16 @@ public class Covered extends AbstractPower implements CloneablePowerInterface {
 			return damageAmount;
 
 		}
+	}
+
+	@Override
+	public void onInitialApplication() {
+		addToBot(new TakingCoverAction(true));
+	}
+
+	@Override
+	public void onRemove() {
+		addToBot(new TakingCoverAction(false));
 	}
 
 	@Override
